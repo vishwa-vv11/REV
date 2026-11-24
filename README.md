@@ -2,7 +2,6 @@
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![CUDA Accelerated](https://img.shields.io/badge/PyTorch-CUDA%20RTX%203050-green.svg)](https://pytorch.org/)
-[![ChromaDB](https://img.shields.io/badge/VectorDB-ChromaDB%20Persistent-orange.svg)](https://www.trychroma.com/)
 [![Ollama](https://img.shields.io/badge/LLM-Ollama%20(Llama--3.2--3B)-purple.svg)](https://ollama.com/)
 [![Streamlit](https://img.shields.io/badge/Frontend-Streamlit%20Dashboard-red.svg)](https://streamlit.io/)
 [![Unit Tests](https://img.shields.io/badge/Tests-41%2F41%20Passing-brightgreen.svg)](tests/)
