@@ -1,0 +1,18 @@
+# AutoDiagnose: Dependencies
+# Core ML & Embeddings
+torch>=2.0.0
+sentence-transformers>=2.6.0
+
+# Vector Database & Lexical Search
+chromadb>=0.4.22
+numpy>=1.24.0
+
+# Document Ingestion & PDF Extraction
+pandas>=2.0.0
+pymupdf>=1.23.0
+
+# Web Application UI
+streamlit>=1.30.0
+
+# Evaluation & Metrics
+ragas>=0.1.0

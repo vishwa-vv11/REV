@@ -1,0 +1,92 @@
+[
+  {
+    "id": "eval_001",
+    "query": "P0301",
+    "category": "exact_code",
+    "expected_dtc_code": "P0301",
+    "expected_parent_id": "dtc_guide_1436_P0301",
+    "should_abstain": false,
+    "ground_truth_answer": "Code P0301 indicates Cylinder 1 Misfire Detected. Diagnosis includes swapping ignition coil and spark plug to confirm cylinder."
+  },
+  {
+    "id": "eval_002",
+    "query": "C0031 left front wheel speed sensor circuit failure",
+    "category": "code_and_symptom",
+    "expected_dtc_code": "C0031",
+    "expected_parent_id": "dtc_guide_213_C0031",
+    "should_abstain": false,
+    "ground_truth_answer": "Code C0031 sets when ABS loses electrical signal from left front wheel speed sensor. Inspect connector and harness routing."
+  },
+  {
+    "id": "eval_003",
+    "query": "Engine vibrates and shakes at idle due to cylinder 1 misfire",
+    "category": "natural_symptom",
+    "expected_dtc_code": "P0301",
+    "expected_parent_id": "dtc_guide_1436_P0301",
+    "should_abstain": false,
+    "ground_truth_answer": "Cylinder 1 misfire causes rough idling and vibration. Check spark plug, ignition coil, and fuel injector on cylinder 1."
+  },
+  {
+    "id": "eval_004",
+    "query": "P0171 system too lean bank 1 vacuum leak",
+    "category": "code_and_symptom",
+    "expected_dtc_code": "P0171",
+    "expected_parent_id": "dtc_guide_1036_P0171",
+    "should_abstain": false,
+    "ground_truth_answer": "Code P0171 indicates system too lean on Bank 1. Leading causes are vacuum leaks downstream of MAF or low fuel pressure."
+  },
+  {
+    "id": "eval_005",
+    "query": "C0035 right front wheel speed sensor supply",
+    "category": "exact_code",
+    "expected_dtc_code": "C0035",
+    "expected_parent_id": "dtc_guide_217_C0035",
+    "should_abstain": false,
+    "ground_truth_answer": "Code C0035 sets when the ABS module loses signal from right front wheel speed sensor supply circuit."
+  },
+  {
+    "id": "eval_006",
+    "query": "Brake pedal switch stuck on causing brake lights to stay illuminated C0040",
+    "category": "code_and_symptom",
+    "expected_dtc_code": "C0040",
+    "expected_parent_id": "dtc_guide_228_C0040",
+    "should_abstain": false,
+    "ground_truth_answer": "Code C0040 sets when brake pedal switch A is misadjusted, worn, or corroded, causing brake lights or shifter interlock issues."
+  },
+  {
+    "id": "eval_007",
+    "query": "MAF sensor circuit range performance false airflow readings P0101",
+    "category": "code_and_symptom",
+    "expected_dtc_code": "P0101",
+    "expected_parent_id": "dtc_guide_924_P0101",
+    "should_abstain": false,
+    "ground_truth_answer": "Code P0101 sets when MAF reported airflow disagrees with throttle position. Clean sensing element or inspect intake tract."
+  },
+  {
+    "id": "eval_008",
+    "query": "Ford OBD system readiness test not complete P1000",
+    "category": "oem_specific",
+    "expected_dtc_code": "P1000",
+    "expected_parent_id": "dtc_guide_11181_P1000",
+    "should_abstain": false,
+    "ground_truth_answer": "Code P1000 on Ford vehicles indicates OBD-II system readiness monitor drive cycle has not been completed."
+  },
+  {
+    "id": "eval_009",
+    "query": "What causes error code P9999 on an anti-gravity starship warp engine?",
+    "category": "out_of_scope",
+    "expected_dtc_code": null,
+    "expected_parent_id": null,
+    "should_abstain": true,
+    "ground_truth_answer": "INSUFFICIENT EVIDENCE: No valid automotive trouble code exists for P9999."
+  },
+  {
+    "id": "eval_010",
+    "query": "How do I make chocolate chip cookies in an automotive repair shop?",
+    "category": "out_of_scope",
+    "expected_dtc_code": null,
+    "expected_parent_id": null,
+    "should_abstain": true,
+    "ground_truth_answer": "INSUFFICIENT EVIDENCE: Non-automotive query lacking technical service documentation."
+  }
+]

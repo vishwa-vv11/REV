@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+
+# IDEs and Code Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# Streamlit Local Runtime
+.streamlit/
+*.streamlit/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+*.coverage.*
+
+# HuggingFace & Torch Cache
+.cache/
+hf_cache/
+
+# ChromaDB Journal / Temporary Files (Keep persistent SQLite, ignore temporary journals/locks)
+vectorstore/chroma_db/*.sqlite3-journal
+vectorstore/chroma_db/*.lock
+
+# User Scratch & Logs
+*.log
+scratch/
