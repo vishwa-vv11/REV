@@ -178,7 +178,7 @@ Evaluated across the standardized automotive benchmark test suite (Exact DTCs, m
 
 ### 1. Prerequisites
 - Python 3.10+
-- NVIDIA GPU with CUDA support (e.g. RTX 3050, 4GB+ VRAM recommended)
+- NVIDIA GPU with CUDA support
 - [Ollama](https://ollama.com/) installed locally
 
 ### 2. Environment Setup
