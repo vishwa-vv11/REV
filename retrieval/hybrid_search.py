@@ -20,6 +20,7 @@ from retrieval.mmr import compute_mmr
 from retrieval.reranker import DiagnosticReranker
 from retrieval.multi_query import MultiQueryExpander
 from retrieval.parent_child import ParentChildResolver
+from retrieval.hyde import HyDEGenerator
 
 class HybridRetriever:
     """
@@ -49,6 +50,7 @@ class HybridRetriever:
 
         self.reranker = DiagnosticReranker()
         self.query_expander = MultiQueryExpander()
+        self.hyde_generator = HyDEGenerator()
         self.parent_resolver = ParentChildResolver()
 
     def search(
@@ -56,6 +58,7 @@ class HybridRetriever:
         query: str,
         top_k: int = config.DEFAULT_TOP_K,
         use_multi_query: bool = True,
+        use_hyde: bool = True,
         use_reranker: bool = True,
         use_mmr: bool = False,
         resolve_parents: bool = False,
@@ -63,15 +66,24 @@ class HybridRetriever:
     ) -> Dict[str, Any]:
         """
         Executes end-to-end hybrid retrieval:
-        1. Query expansion (acronym resolution)
+        1. Query expansion (acronym resolution) + HyDE (Hypothetical Document Embeddings)
         2. Parallel Dense Vector Search + Sparse BM25 Search
         3. Reciprocal Rank Fusion (RRF)
         4. Optional MMR Diversity Filtering
         5. Cross-Feature Diagnostic Reranking
         6. Optional Parent-Child Context Expansion
         """
-        # 1. Multi-Query Expansion
+        # 1. Multi-Query Expansion & HyDE Synthesis
         query_variants = self.query_expander.expand(query) if use_multi_query else [query]
+        hypo_doc = None
+
+        # If user did not provide an explicit alphanumeric DTC code (pure human language),
+        # generate a hypothetical technical OEM manual excerpt to bridge the semantic gap
+        query_codes = re.findall(r"\b[PCBU]\d[0-9A-Za-z]{3}\b", query.upper())
+        if not query_codes and use_hyde:
+            hypo_doc = self.hyde_generator.generate(query)
+            if hypo_doc and hypo_doc not in query_variants:
+                query_variants.append(hypo_doc)
 
         # 2. Dense Vector Search (Search over query variants)
         candidate_k = top_k * 3
@@ -85,8 +97,9 @@ class HybridRetriever:
                     seen_vector_ids.add(h["chunk_id"])
                     vector_candidates.append(h)
 
-        # 3. Sparse BM25 Lexical Search
-        bm25_candidates = self.bm25_retriever.search(query=query, top_k=candidate_k)
+        # 3. Sparse BM25 Lexical Search (include HyDE technical keywords when available)
+        bm25_query = f"{query} {hypo_doc}" if hypo_doc else query
+        bm25_candidates = self.bm25_retriever.search(query=bm25_query, top_k=candidate_k)
 
         # 4. Reciprocal Rank Fusion (RRF)
         fused_hits = reciprocal_rank_fusion(
@@ -114,9 +127,10 @@ class HybridRetriever:
                 # Discard unrelated candidate chunks to prevent cross-code false positives.
                 fused_hits = []
 
-        # 6. Diagnostic Reranking
+        # 6. Diagnostic Reranking (using technical terms from HyDE if available)
+        rerank_query = f"{query} {hypo_doc}" if hypo_doc else query
         if use_reranker and fused_hits:
-            final_hits = self.reranker.rerank(query=query, candidates=fused_hits, top_k=top_k)
+            final_hits = self.reranker.rerank(query=rerank_query, candidates=fused_hits, top_k=top_k)
         else:
             final_hits = fused_hits[:top_k]
 
@@ -128,6 +142,7 @@ class HybridRetriever:
         return {
             "query": query,
             "query_variants": query_variants,
+            "hypothetical_document": hypo_doc,
             "top_hits": final_hits,
             "resolved_parents": parent_docs,
             "vector_count": len(vector_candidates),

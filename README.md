@@ -15,6 +15,7 @@ It fuses dense semantic vector search (**ChromaDB** with **SentenceTransformers*
 ## Key System Features
 
 - ⚡ **Dual-Mode Hybrid Search**: Combines semantic understanding of natural symptom complaints (*"engine shaking at idle"*) with exact alphanumeric matching of OBD-II codes (*"P0301"*).
+- 🧬 **HyDE (Hypothetical Document Embeddings)**: Bridges the semantic gap between layperson symptom descriptions (*"engine shaking heavily at idle"*) and OEM technical manuals, translating human complaints into technical fault mechanics before vector retrieval.
 - 🧠 **Local GPU LLM Synthesis (Ollama)**: Offline, privacy-preserving diagnostic generation powered by `llama3.2:3b` running on local CUDA VRAM.
 - 🛡️ **Comprehensive Reliability & Security Guardrails**:
   - **Prompt Injection Defense**: Intercepts jailbreaks, DAN mode attacks, and malicious requests (e.g. vehicle hotwiring/tampering).
@@ -24,6 +25,43 @@ It fuses dense semantic vector search (**ChromaDB** with **SentenceTransformers*
 - 🔄 **Small-to-Big Context Expansion**: Indexes concise child chunks (~400 characters) for high retrieval precision, expanding to full parent technical repair guides during synthesis.
 - 📊 **Automated Quantitative Benchmark Suite**: Computes Information Retrieval metrics (Hit Rate@K, MRR, Latency) and RAGAS metrics (Faithfulness, Relevancy, Abstention Accuracy).
 - 🖥️ **Interactive Web UI (Streamlit)**: Complete dashboard featuring diagnostic guidance, retrieval ranking inspections, live model switching, temperature tuning, and OEM manual uploads.
+
+---
+
+## Application Preview & Live Outputs
+
+### 1. Interactive Diagnostic Dashboard & Multi-Engine Controls
+The central command dashboard allows technicians and DIY mechanics to query by Diagnostic Trouble Code (DTC), natural symptom description, or vehicle make/model filters.
+
+![REV Dashboard Overview](assets/images/dashboard_overview.png)
+
+---
+
+### 2. Evidence-Grounded Diagnostic Guidance (Ollama + Grounding Audit)
+Synthesized diagnostic output powered by local **Llama 3.2:3b** on CUDA, featuring live execution latency tracking, trouble code identification, difficulty ratings, and automated **100% Grounded Claim Auditing**.
+
+![Diagnostic Guidance with Ollama and Claim Audit](assets/images/ollama_generation.jpg)
+
+---
+
+### 3. Retrieval Engine Inspection & Ranking Audit
+The engineering inspection window displays the exact candidate chunks, raw similarity scores, and metadata retrieved across ChromaDB and Okapi BM25 before generation.
+
+![Retrieval Engine Inspection & Ranking Audit](assets/images/retrieval_inspector.jpg)
+
+---
+
+### 4. Quantitative Benchmark & Evaluation Report
+Built-in benchmark tab rendering real-time comparative evaluation of Information Retrieval (IR) metrics against the baseline dense vector search alongside RAGAS quality dimensions.
+
+![Quantitative Benchmark Evaluation](assets/images/benchmark_metrics.jpg)
+
+---
+
+### 5. Natural Language Symptom Diagnostics (HyDE Retrieval)
+Technicians and vehicle owners describe symptoms using human language complaints (*"engine shaking heavily at idle"*) rather than diagnostic trouble codes. Through **Hypothetical Document Embeddings (HyDE)**, the query is translated into technical OEM fault mechanics, retrieving Code **P0506** (Idle Air Control System RPM Low) with an exact 4-step throttle body and IAC passage cleaning sequence.
+
+![Natural Language Symptom Diagnostics via HyDE](assets/images/hyde_symptom_retrieval.png)
 
 ---
 

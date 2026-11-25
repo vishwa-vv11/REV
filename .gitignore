@@ -48,3 +48,14 @@ vectorstore/chroma_db/*.lock
 # User Scratch & Logs
 *.log
 scratch/
+
+# Node.js & Frontend
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+
